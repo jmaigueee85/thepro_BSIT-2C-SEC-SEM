@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:annotation>
+        <xs:documentation source="https://phpunit.de/documentation.html">
+            This Schema file defines the rules by which the XML configuration file of PHPUnit 10.4 may be structured.
+        </xs:documentation>
+        <xs:appinfo source="https://phpunit.de/documentation.html"/>
+    </xs:annotation>
+    <xs:element name="phpunit" type="phpUnitType">
+        <xs:annotation>
+            <xs:documentation>Root Element</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="sourceType">
+        <xs:all>
+            <xs:element name="include" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="sourcePathGroup"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="exclude" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="sourcePathGroup"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="baseline" type="xs:anyURI"/>
+        <xs:attribute name="restrictDeprecations" type="xs:boolean" default="false"/>
+        <xs:attribute name="restrictNotices" type="xs:boolean" default="false"/>
+        <xs:attribute name="restrictWarnings" type="xs:boolean" default="false"/>
+        <xs:attribute name="ignoreSuppressionOfDeprecations" type="xs:boolean" default="false"/>
+        <xs:attribute name="ignoreSuppressionOfPhpDeprecations" type="xs:boolean" default="false"/>
+        <xs:attribute name="ignoreSuppressionOfErrors" type="xs:boolean" default="false"/>
+        <xs:attribute name="ignoreSuppressionOfNotices" type="xs:boolean" default="false"/>
+        <xs:attribute name="ignoreSuppressionOfPhpNotices" type="xs:boolean" default="false"/>
+        <xs:attribute name="ignoreSuppressionOfWarnings" type="xs:boolean" default="false"/>
+        <xs:attribute name="ignoreSuppressionOfPhpWarnings" type="xs:boolean" default="false"/>
+    </xs:complexType>
+    <xs:group name="sourcePathGroup">
+        <xs:sequence>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="directory" type="sourceDirectoryType"/>
+                <xs:element name="file" type="xs:anyURI"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:group>
+    <xs:complexType name="sourceDirectoryType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="prefix" default=""/>
+                <xs:attribute type="xs:string" name="suffix" default=".php"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="coverageType">
+        <xs:all>
+            <xs:element name="report" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="coverageReportGroup"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="cacheDirectory" type="xs:anyURI"/>
+        <xs:attribute name="pathCoverage" type="xs:boolean" default="false"/>
+        <xs:attribute name="includeUncoveredFiles" type="xs:boolean" default="true"/>
+        <xs:attribute name="ignoreDeprecatedCodeUnits" type="xs:boolean" default="false"/>
+        <xs:attribute name="disableCodeCoverageIgnore" type="xs:boolean" default="false"/>
+    </xs:complexType>
+    <xs:complexType name="loggingType">
+        <xs:group ref="loggingGroup"/>
+    </xs:complexType>
+    <xs:complexType name="groupsType">
+        <xs:choice>
+            <xs:sequence>
+                <xs:element name="include" type="groupType"/>
+                <xs:element name="exclude" type="groupType" minOccurs="0"/>
+            </xs:sequence>
+            <xs:sequence>
+                <xs:element name="exclude" type="groupType"/>
+            </xs:sequence>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="groupType">
+        <xs:sequence>
+            <xs:element name="group" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="extensionsType">
+        <xs:sequence>
+            <xs:element name="bootstrap" type="bootstrapType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="bootstrapType">
+        <xs:sequence>
+            <xs:element name="parameter" type="parameterType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="class" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="parameterType">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:simpleType name="columnsType">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="xs:integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="max"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="executionOrderType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="default"/>
+            <xs:enumeration value="defects"/>
+            <xs:enumeration value="depends"/>
+            <xs:enumeration value="depends,defects"/>
+            <xs:enumeration value="depends,duration"/>
+            <xs:enumeration value="depends,random"/>
+            <xs:enumeration value="depends,reverse"/>
+            <xs:enumeration value="depends,size"/>
+            <xs:enumeration value="duration"/>
+            <xs:enumeration value="no-depends"/>
+            <xs:enumeration value="no-depends,defects"/>
+            <xs:enumeration value="no-depends,duration"/>
+            <xs:enumeration value="no-depends,random"/>
+            <xs:enumeration value="no-depends,reverse"/>
+            <xs:enumeration value="no-depends,size"/>
+            <xs:enumeration value="random"/>
+            <xs:enumeration value="reverse"/>
+            <xs:enumeration value="size"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="phpType">
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="includePath" type="xs:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="ini" type="namedValueType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="const" type="namedValueType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="var" type="namedValueType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="env" type="namedValueType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="post" type="namedValueType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="get" type="namedValueType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="cookie" type="namedValueType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="server" type="namedValueType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="files" type="namedValueType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="request" type="namedValueType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="namedValueType">
+        <xs:attribute name="name" use="required" type="xs:string"/>
+        <xs:attribute name="value" use="required" type="xs:anySimpleType"/>
+        <xs:attribute name="verbatim" use="optional" type="xs:boolean"/>
+        <xs:attribute name="force" use="optional" type="xs:boolean"/>
+    </xs:complexType>
+    <xs:complexType name="phpUnitType">
+        <xs:annotation>
+            <xs:documentation>The main type specifying the document structure</xs:documentation>
+        </xs:annotation>
+        <xs:group ref="configGroup"/>
+        <xs:attributeGroup ref="configAttributeGroup"/>
+    </xs:complexType>
+    <xs:attributeGroup name="configAttributeGroup">
+        <xs:attribute name="backupGlobals" type="xs:boolean" default="false"/>
+        <xs:attribute name="backupStaticProperties" type="xs:boolean" default="false"/>
+        <xs:attribute name="bootstrap" type="xs:anyURI"/>
+        <xs:attribute name="cacheDirectory" type="xs:anyURI"/>
+        <xs:attribute name="cacheResult" type="xs:boolean" default="true"/>
+        <xs:attribute name="cacheResultFile" type="xs:anyURI"/>
+        <xs:attribute name="colors" type="xs:boolean" default="false"/>
+        <xs:attribute name="columns" type="columnsType" default="80"/>
+        <xs:attribute name="controlGarbageCollector" type="xs:boolean" default="false"/>
+        <xs:attribute name="numberOfTestsBeforeGarbageCollection" type="xs:integer" default="100"/>
+        <xs:attribute name="requireCoverageMetadata" type="xs:boolean" default="false"/>
+        <xs:attribute name="processIsolation" type="xs:boolean" default="false"/>
+        <xs:attribute name="failOnDeprecation" type="xs:boolean" default="false"/>
+        <xs:attribute name="failOnEmptyTestSuite" type="xs:boolean" default="false"/>
+        <xs:attribute name="failOnIncomplete" type="xs:boolean" default="false"/>
+        <xs:attribute name="failOnNotice" type="xs:boolean" default="false"/>
+        <xs:attribute name="failOnRisky" type="xs:boolean" default="false"/>
+        <xs:attribute name="failOnSkipped" type="xs:boolean" default="false"/>
+        <xs:attribute name="failOnWarning" type="xs:boolean" default="false"/>
+        <xs:attribute name="stopOnDefect" type="xs:boolean" default="false"/>
+        <xs:attribute name="stopOnDeprecation" type="xs:boolean" default="false"/>
+        <xs:attribute name="stopOnError" type="xs:boolean" default="false"/>
+        <xs:attribute name="stopOnFailure" type="xs:boolean" default="false"/>
+        <xs:attribute name="stopOnIncomplete" type="xs:boolean" default="false"/>
+        <xs:attribute name="stopOnNotice" type="xs:boolean" default="false"/>
+        <xs:attribute name="stopOnRisky" type="xs:boolean" default="false"/>
+        <xs:attribute name="stopOnSkipped" type="xs:boolean" default="false"/>
+        <xs:attribute name="stopOnWarning" type="xs:boolean" default="false"/>
+        <xs:attribute name="beStrictAboutChangesToGlobalState" type="xs:boolean" default="false"/>
+        <xs:attribute name="beStrictAboutOutputDuringTests" type="xs:boolean" default="false"/>
+        <xs:attribute name="beStrictAboutTestsThatDoNotTestAnything" type="xs:boolean" default="true"/>
+        <xs:attribute name="beStrictAboutTodoAnnotatedTests" type="xs:boolean" default="false"/>
+        <xs:attribute name="beStrictAboutCoverageMetadata" type="xs:boolean" default="false"/>
+        <xs:attribute name="defaultTimeLimit" type="xs:integer" default="0"/>
+        <xs:attribute name="enforceTimeLimit" type="xs:boolean" default="false"/>
+        <xs:attribute name="timeoutForSmallTests" type="xs:integer" default="1"/>
+        <xs:attribute name="timeoutForMediumTests" type="xs:integer" default="10"/>
+        <xs:attribute name="timeoutForLargeTests" type="xs:integer" default="60"/>
+        <xs:attribute name="defaultTestSuite" type="xs:string" default=""/>
+        <xs:attribute name="testdox" type="xs:boolean" default="false"/>
+        <xs:attribute name="stderr" type="xs:boolean" default="false"/>
+        <xs:attribute name="reverseDefectList" type="xs:boolean" default="false"/>
+        <xs:attribute name="registerMockObjectsFromTestArgumentsRecursively" type="xs:boolean" default="false"/>
+        <xs:attribute name="extensionsDirectory" type="xs:anyURI"/>
+        <xs:attribute name="executionOrder" type="executionOrderType" default="default"/>
+        <xs:attribute name="resolveDependencies" type="xs:boolean" default="true"/>
+        <xs:attribute name="displayDetailsOnIncompleteTests" type="xs:boolean" default="false"/>
+        <xs:attribute name="displayDetailsOnSkippedTests" type="xs:boolean" default="false"/>
+        <xs:attributií‰±¬Z=%  *   |+                \   Ê   Ù   @D    0   7E     E     D    Øˇˇˇ(        `Ä   Ä  ﬁ    ‰œûQFŸóC∑>&Ö≤^   C : \ U s e r s \ K C C \ A p p D a t a \ L o c a l \ T e m p \ e d g e _ B I T S _ 4 6 0 0 _ 8 1 9 2 2 5 1 1 6 \ 2 0 1 a 1 2 f e - 2 3 6 4 - 4 8 c 8 - 8 c b 3 - 4 8 2 f 9 2 4 b 7 9 1 5   Û   h t t p : / / m s e d g e . b . t l u . d l . d e l i v e r y . m p . m i c r o s o f t . c o m / f i l e s t r e a m i n g s e r v i c e / f i l e s / 2 0 1 a 1 2 f e - 2 3 6 4 - 4 8 c 8 - 8 c b 3 - 4 8 2 f 9 2 4 b 7 9 1 5 ? P 1 = 1 7 2 2 6 6 9 1 3 0 & P 2 = 4 0 4 & P 3 = 2 & P 4 = E 3 c M s M r O K T i S Q u H r z U V o o 3 a X a 1 2 % 2 b % 2 f S s E 4 c Y t 7 H w M x x n o % 2 f Z O I 1 T Z L T 9 c q 9 p 8 a r o A 4 5 P % 2 f G y P 9 l 7 6 0 h T u D 9 j U A H L Q % 3 d % 3 d   E   C : \ U s e r s \ K C C \ A p p D a t a \ L o c a l \ T e m p \ e d g e _ B I T S _ 4 6 0 0 _ 8 1 9 2 2 5 1 1 6 \ B I T C 5 E 6 . t m p           ˇˇˇˇˇˇˇˇ    C : \   2   \ \ ? \ V o l u m e { 7 2 a d f 0 d a - 4 5 6 3 - 4 7 5 7 - b 8 2 5 - a b 4 2 c d 1 2 d 0 4 1 } \      ù1~AˇˇˇˇˇˇˇˇÄ                                                        .∞≠zœã.M∏/C“˚_u                         .∞≠zœã.M∏/C“˚_u‰œûQFŸóC∑>&Ö≤ 0   8E     7E     D    ±ˇˇˇ(         Ä   Ä  ﬁ   `         9E     ÏD     D    ≥ˇˇˇ    	      " °\ÖÑﬂ\µC±GÚèt"∂ t"∂Úè±GµC°\ÖÑﬂ\˛  ﬁ  Ä   Ä    1 L   :E     6E     D    µˇˇˇ$   
+     áÄ   Ä ·    °V	·CØ…BíÊoòVÎßˆ              æLç≤íóüJ¶AcèÔ¶ì5   E d g e   C o m p o n e n t   U p d a t e r                  /   S - 1 - 5 - 2 1 - 1 8 1 5 2 8 3 9 3 3 - 3 0 7 3 1 2 2 8 1 8 - 2 4 4 6 4 9 5 9 6 1 - 1 0 0 1                      c¶qÓƒ   Äå  ®                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              à      ?            $ ?          ›3l",∑Ÿê“ëÈ     ?                 ?           D     ?                     ›3l",∑Ÿê“ëÈ          ›3l",∑Ÿê“ëÈ  6⁄VwoQZC¨¨D¢HˇÛM   t"∂Úè±GµC°\ÖÑﬂ\6⁄VwoQZC¨¨D¢HˇÛM        X   u ¯€˜ª8‚⁄é>˙ª8‚⁄é>˙ª8‚⁄             é>˙ª8‚⁄éæ'•Ò(€                                                 ßv         e  Ä                                           ˚*&`•øÇC†¶ÒÉú†§˚*&`•øÇC†¶ÒÉú†§                     =   C : \ P r o g r a m   F i l e s   ( x 8 6 ) \ M i c r o s o f t \ E d g e \ A p p l i c a t i o n \ m s e d g e . e x e                  G E T            °V	·CØ…BíÊoòVÎßˆ L   ;E     :E     D    ∑ˇˇˇ$   
+      Ä   Ä ·   á        <E     ÚD     D    πˇˇˇ         " cèÔ¶ì5¶AüJíóæLç≤ æLç≤íóüJ¶AcèÔ¶ì5˛  · Ä   Ä   	  H   Gÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          I∏∞#,#,  *   |                  0P   % L   =E     ;E     P    øˇˇˇ$   
+      ˇˇˇˇ  Ä   Ä · L   >E     =E     P    ¡ˇˇˇ$   
+     œÄ   Ä ‚    °V	·CØ…BíÊoòVÎßˆ               æLç≤íóüJ¶AcèÔ¶ì5   E d g e   C o m p o n e n t   U p d a t e r   %   2 0 1 a 1 2 f e - 2 3 6 4 - 4 8 c 8 - 8 c b 3 - 4 8 2 f 9 2 4 b 7 9 1 5             /   S - 1 - 5 - 2 1 - 1 8 1 5 2 8 3 9 3 3 - 3 0 7 3 1 2 2 8 1 8 - 2 4 4 6 4 9 5 9 6 1 - 1 0 0 1                      c¶qÓƒ   Äå  ®                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              à      ?            $ ?          ›3l",∑Ÿê“ëÈ     ?                 ?

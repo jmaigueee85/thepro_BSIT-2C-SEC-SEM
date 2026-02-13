@@ -1,0 +1,140 @@
+rictionDefault>CONSTRAINT_SCHEMA</RestrictionDefault>
+    <RestrictionNumber>2</RestrictionNumber>
+  </Restrictions>
+  <Restrictions>
+    <CollectionName>ForeignKeys</CollectionName>
+    <RestrictionName>Table</RestrictionName>
+    <ParameterName>@Table</ParameterName>
+    <RestrictionDefault>TABLE_NAME</RestrictionDefault>
+    <RestrictionNumber>3</RestrictionNumber>
+  </Restrictions>
+  <Restrictions>
+    <CollectionName>ForeignKeys</CollectionName>
+    <RestrictionName>Name</RestrictionName>
+    <ParameterName>@Name</ParameterName>
+    <RestrictionDefault>CONSTRAINT_NAME</RestrictionDefault>
+    <RestrictionNumber>4</RestrictionNumber>
+  </Restrictions>
+  <DataSourceInformation>
+    <CompositeIdentifierSeparatorPattern>\.</CompositeIdentifierSeparatorPattern>
+    <DataSourceProductName>Microsoft SQL Server</DataSourceProductName>
+    <GroupByBehavior>2</GroupByBehavior>
+    <IdentifierPattern>(^\[\p{Lo}\p{Lu}\p{Ll}_@#][\p{Lo}\p{Lu}\p{Ll}\p{Nd}@$#_]*$)|(^\[[^\]\0]|\]\]+\]$)|(^\"[^\"\0]|\"\"+\"$)</IdentifierPattern>
+    <IdentifierCase>1</IdentifierCase>
+    <OrderByColumnsInSelect>false</OrderByColumnsInSelect>
+    <ParameterMarkerFormat>{0}</ParameterMarkerFormat>
+    <ParameterMarkerPattern>@[\p{Lo}\p{Lu}\p{Ll}\p{Lm}_@#][\p{Lo}\p{Lu}\p{Ll}\p{Lm}\p{Nd}\uff3f_@#\$]*(?=\s+|$)</ParameterMarkerPattern>
+    <ParameterNameMaxLength>128</ParameterNameMaxLength>
+    <ParameterNamePattern>^[\p{Lo}\p{Lu}\p{Ll}\p{Lm}_@#][\p{Lo}\p{Lu}\p{Ll}\p{Lm}\p{Nd}\uff3f_@#\$]*(?=\s+|$)</ParameterNamePattern>
+    <QuotedIdentifierPattern>(([^\[]|\]\])*)</QuotedIdentifierPattern>
+    <QuotedIdentifierCase>1</QuotedIdentifierCase>
+    <StatementSeparatorPattern>;</StatementSeparatorPattern>
+    <StringLiteralPattern>'(([^']|'')*)'</StringLiteralPattern>
+    <SupportedJoinOperators>15</SupportedJoinOperators>
+  </DataSourceInformation>
+<DataTypes>
+<TypeName>smallint</TypeName>
+<ProviderDbType>16</ProviderDbType>
+<ColumnSize>5</ColumnSize>
+<CreateFormat>smallint</CreateFormat>
+<DataType>System.Int16</DataType>
+<IsAutoIncrementable>true</IsAutoIncrementable>
+<IsBestMatch>true</IsBestMatch>
+<IsCaseSensitive>false</IsCaseSensitive>
+<IsConcurrencyType>false</IsConcurrencyType>
+<IsFixedLength>true</IsFixedLength>
+<IsFixedPrecisionScale>true</IsFixedPrecisionScale>
+<IsLong>false</IsLong>
+<IsNullable>true</IsNullable>
+<IsSearchable>true</IsSearchable>
+<IsSearchableWithLike>false</IsSearchableWithLike>
+<IsUnsigned>false</IsUnsigned>
+</DataTypes>
+<DataTypes>
+<TypeName>int</TypeName>
+<ProviderDbType>8</ProviderDbType>
+<ColumnSize>10</ColumnSize>
+<CreateFormat>int</CreateFormat>
+<DataType>System.Int32</DataType>
+<IsAutoIncrementable>true</IsAutoIncrementable>
+<IsBestMatch>true</IsBestMatch>
+<IsCaseSensitive>false</IsCaseSensitive>
+<IsConcurrencyType>false</IsConcurrencyType>
+<IsFixedLength>true</IsFixedLength>
+<IsFixedPrecisionScale>true</IsFixedPrecisionScale>
+<IsLong>false</IsLong>
+<IsNullable>true</IsNullable>
+<IsSearchable>true</IsSearchable>
+<IsSearchableWithLike>false</IsSearchableWithLike>
+<IsUnsigned>false</IsUnsigned>
+</DataTypes>
+<DataTypes>
+<TypeName>real</TypeName>
+<ProviderDbType>13</ProviderDbType>
+<ColumnSize>7</ColumnSize>
+<CreateFormat>real</CreateFormat>
+<DataType>System.Single</DataType>
+<IsAutoIncrementable>false</IsAutoIncrementable>
+<IsBestMatch>true</IsBestMatch>
+<IsCaseSensitive>false</IsCaseSensitive>
+<IsConcurrencyType>false</IsConcurrencyType>
+<IsFixedLength>true</IsFixedLength>
+<IsFixedPrecisionScale>false</IsFixedPrecisionScale>
+<IsLong>false</IsLong>
+<IsNullable>true</IsNullable>
+<IsSearchable>true</IsSearchable>
+<IsSearchableWithLike>false</IsSearchableWithLike>
+<IsUnsigned>false</IsUnsigned>
+</DataTypes>
+<DataTypes>
+<TypeName>float</TypeName>
+<ProviderDbType>6</ProviderDbType>
+<ColumnSize>53</ColumnSize>
+<CreateFormat>float({0})</CreateFormat>
+<CreateParameters>number of bits used to store the mantissa</CreateParameters>
+<DataType>System.Double</DataType>
+<IsAutoIncrementable>false</IsAutoIncrementable>
+<IsBestMatch>true</IsBestMatch>
+<IsCaseSensitive>false</IsCaseSensitive>
+<IsConcurrencyType>false</IsConcurrencyType>
+<IsFixedLength>true</IsFixedLength>
+<IsFixedPrecisionScale>false</IsFixedPrecisionScale>
+<IsLong>false</IsLong>
+<IsNullable>true</IsNullable>
+<IsSearchable>true</IsSearchable>
+<IsSearchableWithLike>false</IsSearchableWithLike>
+<IsUnsigned>false</IsUnsigned>
+</DataTypes>
+<DataTypes>
+<TypeName>money</TypeName>
+<ProviderDbType>9</ProviderDbType>
+<ColumnSize>19</ColumnSize>
+<CreateFormat>money</CreateFormat>
+<DataType>System.Decimal</DataType>
+<IsAutoIncrementable>false</IsAutoIncrementable>
+<IsBestMatch>false</IsBestMatch>
+<IsCaseSensitive>false</IsCaseSensitive>
+<IsConcurrencyType>false</IsConcurrencyType>
+<IsFixedLength>true</IsFixedLength>
+<IsFixedPrecisionScale>true</IsFixedPrecisionScale>
+<IsLong>false</IsLong>
+<IsNullable>true</IsNullable>
+<IsSearchable>true</IsSearchable>
+<IsSearchableWithLike>false</IsSearchableWithLike>
+<IsUnsigned>false</IsUnsigned>
+</DataTypes>
+<DataTypes>
+<TypeName>smallmoney</TypeName>
+<ProviderDbType>17</ProviderDbType>
+<ColumnSize>10</ColumnSize>
+<CreateFormat>smallmoney</CreateFormat>
+<DataType>System.Decimal</DataType>
+<IsAutoIncrementable>false</IsAutoIncrementable>
+<IsBestMatch>false</IsBestMatch>
+<IsCaseSensitive>false</IsCaseSensitive>
+<IsConcurrencyType>false</IsConcurrencyType>
+<IsFixedLength>true</IsFixedLength>
+<IsFixedPrecisionScale>true</IsFixedPrecisionScale>
+<IsLong>false</IsLong>
+<IsNullable>true</IsNullable>
+<IsSearchable>true</I
